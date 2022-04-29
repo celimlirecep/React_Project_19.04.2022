@@ -29,6 +29,30 @@ app.get("/getEmplyees",(req,res)=>{
         await newEmployee.save();
         res.json(employee);
     })
+
+    app.put("/updateEmployee",async(req,res)=>{
+        const newName=req.body.newName;
+        const newAge=req.body.newAge;
+        const id=req.body.id;
+        console.log(id)
+        try {
+            await EmployeeModel.findById(id,(error,updatedEmployee)=>{
+                updatedEmployee.name=newName;
+                updatedEmployee.age=newAge;
+                updatedEmployee.save();
+
+            });
+        } catch (error) {
+            console.log(error)
+        }
+        res.json("updated işlemi bitti")
+    });
+    app.delete("/deleteEmployee/:id",async(req,res)=>{
+        const id=req.params.id;
+
+        await EmployeeModel.findByIdAndRemove(id).exec();
+        res.send("deleted");
+    });
     
 app.listen(3030,()=>{
     console.log("Server Çalışıyor");

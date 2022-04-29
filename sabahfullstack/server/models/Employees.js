@@ -13,7 +13,12 @@ const EmployeeSchema=new mongoose.Schema({
     username:{
         type:String,
         required:true
+    },
+    img:{
+        type:String,
+        required:false
     }
+
 })
 
 const EmployeeModel=mongoose.model("emplyees",EmployeeSchema);
